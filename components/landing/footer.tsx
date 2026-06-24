@@ -48,6 +48,20 @@ export function Footer() {
         <div className="mt-10 pt-8 border-t border-background/10 text-center">
           <p className="text-background/50 text-sm">
             © {currentYear} Digital Negocios RD. Todos los derechos reservados.
+            {" · "}
+            <Link
+              href="/terminos"
+              className="hover:text-background/80 transition-colors"
+            >
+              Términos de Servicio
+            </Link>
+            {" · "}
+            <Link
+              href="/privacidad"
+              className="hover:text-background/80 transition-colors"
+            >
+              Política de Privacidad
+            </Link>
           </p>
         </div>
       </div>
