@@ -1,30 +1,21 @@
 import { Star } from "lucide-react"
 
-// Placeholder testimonials - replace with real ones when available
 const testimonials = [
   {
-    name: "María González",
-    business: "Pastelería La Dulce",
+    name: "Alexander",
+    business: "Creatina Express RD",
     quote:
-      "Desde que uso el bot, no pierdo pedidos ni a las 2am. Mis clientes están felices y yo duermo tranquila.",
+      "Desde que automaticé mis pedidos por WhatsApp no tengo que estar pendiente del teléfono. Ya procesé más de 141 pedidos.",
     rating: 5,
-    initials: "MG",
+    initials: "A",
   },
   {
-    name: "Carlos Rodríguez",
-    business: "Pizza Express RD",
+    name: "Willy Bastardo",
+    business: "ZoeFashionmenhm, Hato Mayor",
     quote:
-      "Antes perdía pedidos por no poder contestar a tiempo. Ahora el bot atiende todo y yo solo preparo.",
+      "Mis clientes ahora pueden ver el catálogo completo y hacer su pedido directo por WhatsApp. Profesional y fácil.",
     rating: 5,
-    initials: "CR",
-  },
-  {
-    name: "Ana Pérez",
-    business: "Comida Criolla Ana",
-    quote:
-      "Fácil de usar y el soporte siempre está disponible. Lo recomiendo a cualquier negocio de comida.",
-    rating: 5,
-    initials: "AP",
+    initials: "WB",
   },
 ]
 
@@ -41,7 +32,7 @@ export function Testimonials() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 max-w-3xl mx-auto gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}

@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { Check, X, MessageCircle, Zap, Star, Crown, type LucideIcon } from "lucide-react"
+import { Check, X, MessageCircle, Zap, Crown, Layers, type LucideIcon } from "lucide-react"
 
 const WHATSAPP_NUMBER = "18099869730"
-const WHATSAPP_MESSAGE = "Hola! Quiero información sobre los planes de DigitalBot para mi negocio"
 
 type Plan = {
   id: string
@@ -19,106 +18,81 @@ type Plan = {
   gradient: string
   border: string
   badgeBg: string
+  ctaLabel: string
 }
 
 const plans: Plan[] = [
   {
-    id: "starter",
+    id: "basico",
     name: "DigitalBot Básico",
-    subtitle: "Plan Starter",
+    subtitle: "Plan Básico",
     Icon: Zap,
-    target: "Ideal para food trucks y negocios pequeños",
+    target: "Ideal para negocios que quieren automatizar sus pedidos por WhatsApp",
     setup: "RD$3,000",
     monthly: "RD$1,500",
     featured: false,
     includes: [
-      "Menú y toma de pedidos 24/7",
-      "Notificaciones al dueño",
-      "Panel de administración web",
-      "Soporte básico 48h",
+      "Automatización completa de pedidos por WhatsApp",
+      "Menú con categorías y precios",
+      "Notificación al dueño en tiempo real",
+      "Estados de pedido (confirmado, en camino, entregado)",
+      "Horario de atención configurable",
+      "Panel administrativo",
     ],
-    message: "Hola! Quiero contratar el Plan Starter (DigitalBot Básico) para mi negocio",
+    message: "Hola! Quiero contratar el Plan Básico (DigitalBot Básico) para mi negocio",
     gradient: "from-slate-50 to-blue-50",
     border: "border-slate-200",
     badgeBg: "",
-  },
-  {
-    id: "pro",
-    name: "DigitalBot Pro",
-    subtitle: "Plan Pro",
-    Icon: Star,
-    target: "Restaurantes, vape shops y tiendas",
-    setup: "RD$6,000",
-    monthly: "RD$3,500",
-    featured: true,
-    badge: "⭐ RECOMENDADO",
-    includes: [
-      "Todo lo del Plan Básico",
-      "Pausa manual del bot",
-      "Restricción de horarios",
-      "Cooldown post-pedido",
-      "Estadísticas de ventas",
-      "Ubicación y enlace Google Maps",
-      "Soporte prioritario 24h",
-      "1 feature personalizado/mes",
-      "Onboarding y capacitación",
-    ],
-    message: "Hola! Quiero contratar el Plan Pro (DigitalBot Pro) para mi negocio",
-    gradient: "from-blue-600 to-indigo-700",
-    border: "border-blue-500",
-    badgeBg: "bg-orange-500",
+    ctaLabel: "Contratar Plan Básico",
   },
   {
     id: "elite",
-    name: "DigitalBot Elite",
-    subtitle: "Plan Elite",
+    name: "DigitalBot Elite IA",
+    subtitle: "Plan Elite IA",
     Icon: Crown,
-    target: "Cadenas y negocios de alto volumen",
-    setup: "RD$12,000",
-    monthly: "RD$6,500",
-    featured: false,
+    target: "Para negocios que quieren IA conversacional y catálogo digital",
+    setup: "RD$8,000",
+    monthly: "RD$5,000",
+    featured: true,
+    badge: "⭐ RECOMENDADO",
     includes: [
-      "Todo lo del Plan Pro",
-      "Hasta 2 sucursales",
-      "Onboarding personalizado",
-      "Capacitación al equipo",
-      "Soporte urgente misma jornada",
-      "Reporte mensual de operaciones",
-      "Acceso anticipado a novedades",
+      "Todo lo del Básico",
+      "IA conversacional con Gemini",
+      "Catálogo digital público con fotos",
+      "Sistema de variantes y tallas con stock real",
+      "Config IA desde el panel sin tocar código",
+      "Pausa automática cuando el dueño interviene",
+      "Vista de clientes y leads con exportación CSV",
+      "Mensajes masivos a clientes",
     ],
-    message: "Hola! Quiero contratar el Plan Elite (DigitalBot Elite) para mi negocio",
-    gradient: "from-slate-50 to-purple-50",
-    border: "border-purple-200",
-    badgeBg: "",
+    message: "Hola! Quiero contratar el Plan Elite IA (DigitalBot Elite IA) para mi negocio",
+    gradient: "from-blue-600 to-indigo-700",
+    border: "border-blue-500",
+    badgeBg: "bg-orange-500",
+    ctaLabel: "Contratar Plan Elite IA",
   },
 ]
 
 type ComparisonFeature = {
   name: string
-  starter: boolean
-  pro: boolean
+  basico: boolean
   elite: boolean
 }
 
 const comparisonFeatures: ComparisonFeature[] = [
-  { name: "Menú y toma de pedidos 24/7", starter: true, pro: true, elite: true },
-  { name: "Notificaciones al dueño", starter: true, pro: true, elite: true },
-  { name: "Panel de administración web", starter: true, pro: true, elite: true },
-  { name: "Soporte básico 48h", starter: true, pro: false, elite: false },
-  { name: "Pausa manual del bot", starter: false, pro: true, elite: true },
-  { name: "Restricción de horarios", starter: false, pro: true, elite: true },
-  { name: "Cooldown post-pedido", starter: false, pro: true, elite: true },
-  { name: "Estadísticas de ventas", starter: false, pro: true, elite: true },
-  { name: "Ubicación y enlace Google Maps", starter: false, pro: true, elite: true },
-  { name: "Soporte prioritario 24h", starter: false, pro: true, elite: true },
-  { name: "1 feature personalizado/mes", starter: false, pro: true, elite: true },
-  { name: "Onboarding y capacitación", starter: false, pro: true, elite: true },
-  { name: "Hasta 2 sucursales", starter: false, pro: false, elite: true },
-  { name: "Onboarding personalizado", starter: false, pro: false, elite: true },
-  { name: "Capacitación al equipo", starter: false, pro: false, elite: true },
-  { name: "Soporte urgente misma jornada", starter: false, pro: false, elite: true },
-  { name: "Reporte mensual de operaciones", starter: false, pro: false, elite: true },
-  { name: "Acceso anticipado a novedades", starter: false, pro: false, elite: true },
+  { name: "Automatización completa de pedidos por WhatsApp", basico: true, elite: true },
+  { name: "Menú con categorías y precios", basico: true, elite: true },
+  { name: "Notificación al dueño en tiempo real", basico: true, elite: true },
+  { name: "Estados de pedido (confirmado, en camino, entregado)", basico: true, elite: true },
+  { name: "Horario de atención configurable", basico: true, elite: true },
+  { name: "Panel administrativo", basico: true, elite: true },
+  { name: "IA conversacional con Gemini", basico: false, elite: true },
+  { name: "Catálogo digital público con fotos", basico: false, elite: true },
+  { name: "Sistema de variantes y tallas con stock real", basico: false, elite: true },
+  { name: "Config IA desde el panel sin tocar código", basico: false, elite: true },
+  { name: "Pausa automática cuando el dueño interviene", basico: false, elite: true },
+  { name: "Vista de clientes y leads con exportación CSV", basico: false, elite: true },
+  { name: "Mensajes masivos a clientes", basico: false, elite: true },
 ]
 
 function PlanCard({ plan }: { plan: Plan }) {
@@ -164,7 +138,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           <Button asChild size="lg" className="w-full bg-white text-blue-600 hover:bg-blue-50 font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <MessageCircle className="mr-2 h-4 w-4" />
-              Contratar Plan Pro
+              {plan.ctaLabel}
             </a>
           </Button>
           <p className="text-center text-xs text-blue-200 mt-3">Sin contrato largo · Cancela cuando quieras</p>
@@ -173,24 +147,15 @@ function PlanCard({ plan }: { plan: Plan }) {
     )
   }
 
-  const isElite = plan.id === "elite"
-  const accentColor = isElite ? "text-purple-600" : "text-blue-600"
-  const checkBg = isElite ? "bg-purple-100" : "bg-blue-100"
-  const checkIcon = isElite ? "text-purple-600" : "text-blue-600"
-  const btnClass = isElite
-    ? "bg-purple-600 hover:bg-purple-700 text-white"
-    : "bg-blue-600 hover:bg-blue-700 text-white"
-  const label = isElite ? "Contratar Plan Elite" : "Contratar Plan Starter"
-
   return (
     <div className={`relative flex flex-col rounded-3xl border-2 ${plan.border} bg-gradient-to-br ${plan.gradient} shadow-md overflow-hidden`}>
       <div className="p-7 flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-1">
-          <div className={`p-2 ${isElite ? "bg-purple-100" : "bg-blue-100"} rounded-xl ${isElite ? "text-purple-600" : "text-blue-600"}`}>
+          <div className="p-2 bg-blue-100 rounded-xl text-blue-600">
             <plan.Icon className="w-6 h-6" />
           </div>
           <div>
-            <p className={`text-sm font-semibold ${isElite ? "text-purple-500" : "text-blue-500"}`}>{plan.subtitle}</p>
+            <p className="text-sm font-semibold text-blue-500">{plan.subtitle}</p>
             <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
           </div>
         </div>
@@ -198,7 +163,7 @@ function PlanCard({ plan }: { plan: Plan }) {
 
         <div className="mb-6 pb-6 border-b border-border">
           <div className="flex items-baseline gap-1 mb-1">
-            <span className={`text-4xl font-extrabold ${accentColor}`}>{plan.monthly}</span>
+            <span className="text-4xl font-extrabold text-blue-600">{plan.monthly}</span>
             <span className="text-muted-foreground text-base">/mes</span>
           </div>
           <p className="text-sm text-muted-foreground">Setup: <span className="font-semibold text-foreground">{plan.setup}</span> (pago único)</p>
@@ -207,18 +172,18 @@ function PlanCard({ plan }: { plan: Plan }) {
         <ul className="space-y-2.5 flex-1 mb-7">
           {plan.includes.map((feature, i) => (
             <li key={i} className="flex items-start gap-2.5 text-sm text-foreground">
-              <div className={`flex-shrink-0 w-5 h-5 rounded-full ${checkBg} flex items-center justify-center mt-0.5`}>
-                <Check className={`w-3 h-3 ${checkIcon}`} />
+              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center mt-0.5">
+                <Check className="w-3 h-3 text-blue-600" />
               </div>
               {feature}
             </li>
           ))}
         </ul>
 
-        <Button asChild size="lg" className={`w-full font-bold shadow hover:shadow-md transition-all hover:scale-105 ${btnClass}`}>
+        <Button asChild size="lg" className="w-full font-bold shadow hover:shadow-md transition-all hover:scale-105 bg-blue-600 hover:bg-blue-700 text-white">
           <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(plan.message)}`} target="_blank" rel="noopener noreferrer">
             <MessageCircle className="mr-2 h-4 w-4" />
-            {label}
+            {plan.ctaLabel}
           </a>
         </Button>
         <p className="text-center text-xs text-muted-foreground mt-3">Sin contrato largo · Cancela cuando quieras</p>
@@ -244,6 +209,9 @@ function CheckCell({ value }: { value: boolean }) {
 }
 
 export function Pricing() {
+  const addonMessage = "Hola! Quiero agregar el Add-on de Catálogo Digital a mi plan"
+  const addonWhatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(addonMessage)}`
+
   return (
     <section id="precios" className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -258,14 +226,38 @@ export function Pricing() {
         </div>
 
         {/* Plans Grid */}
-        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 items-start mb-20">
+        <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6 items-start mb-12">
           {plans.map((plan) => (
             <PlanCard key={plan.id} plan={plan} />
           ))}
         </div>
 
+        {/* Add-on */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <div className="rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50/50 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
+            <div className="p-3 bg-blue-100 rounded-xl text-blue-600 flex-shrink-0">
+              <Layers className="w-6 h-6" />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <p className="text-sm font-semibold text-blue-600 mb-1">Add-on opcional</p>
+              <h3 className="text-lg font-bold text-foreground mb-1">
+                Catálogo Digital — RD$1,500 setup + RD$500/mes
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Muestra tus productos con fotos, categorías y tallas desde un enlace. Disponible para cualquier plan.
+              </p>
+            </div>
+            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white font-semibold flex-shrink-0">
+              <a href={addonWhatsappUrl} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Solicitar Add-on
+              </a>
+            </Button>
+          </div>
+        </div>
+
         {/* Comparison Table */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <h3 className="text-2xl font-bold text-center text-foreground mb-8">
             Comparación de Features
           </h3>
@@ -273,10 +265,9 @@ export function Pricing() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-muted/60">
-                  <th className="text-left py-4 px-5 font-semibold text-foreground w-[46%]">Feature</th>
-                  <th className="text-center py-4 px-3 font-semibold text-blue-600 w-[18%]">Básico</th>
-                  <th className="text-center py-4 px-3 font-bold text-white bg-blue-600 w-[18%]">Pro ⭐</th>
-                  <th className="text-center py-4 px-3 font-semibold text-purple-600 w-[18%]">Elite</th>
+                  <th className="text-left py-4 px-5 font-semibold text-foreground w-[60%]">Feature</th>
+                  <th className="text-center py-4 px-3 font-semibold text-blue-600 w-[20%]">Básico</th>
+                  <th className="text-center py-4 px-3 font-bold text-white bg-blue-600 w-[20%]">Elite IA ⭐</th>
                 </tr>
               </thead>
               <tbody>
@@ -286,9 +277,8 @@ export function Pricing() {
                     className={i % 2 === 0 ? "bg-background" : "bg-muted/30"}
                   >
                     <td className="py-3 px-5 text-muted-foreground">{feature.name}</td>
-                    <td className="py-3 px-3"><CheckCell value={feature.starter} /></td>
-                    <td className="py-3 px-3 bg-blue-50"><CheckCell value={feature.pro} /></td>
-                    <td className="py-3 px-3"><CheckCell value={feature.elite} /></td>
+                    <td className="py-3 px-3"><CheckCell value={feature.basico} /></td>
+                    <td className="py-3 px-3 bg-blue-50"><CheckCell value={feature.elite} /></td>
                   </tr>
                 ))}
               </tbody>
@@ -296,14 +286,12 @@ export function Pricing() {
                 <tr className="bg-muted/60 border-t border-border">
                   <td className="py-4 px-5 font-semibold text-foreground">Precio mensual</td>
                   <td className="py-4 px-3 text-center font-bold text-blue-600">RD$1,500</td>
-                  <td className="py-4 px-3 text-center font-bold text-white bg-blue-600">RD$3,500</td>
-                  <td className="py-4 px-3 text-center font-bold text-purple-600">RD$6,500</td>
+                  <td className="py-4 px-3 text-center font-bold text-white bg-blue-600">RD$5,000</td>
                 </tr>
                 <tr className="bg-muted/40">
                   <td className="py-4 px-5 font-semibold text-foreground">Setup (pago único)</td>
                   <td className="py-4 px-3 text-center font-semibold text-muted-foreground">RD$3,000</td>
-                  <td className="py-4 px-3 text-center font-semibold text-white bg-blue-600">RD$6,000</td>
-                  <td className="py-4 px-3 text-center font-semibold text-muted-foreground">RD$12,000</td>
+                  <td className="py-4 px-3 text-center font-semibold text-white bg-blue-600">RD$8,000</td>
                 </tr>
               </tfoot>
             </table>

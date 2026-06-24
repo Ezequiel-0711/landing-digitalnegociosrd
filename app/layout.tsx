@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   keywords: ['WhatsApp', 'bot', 'pedidos', 'restaurante', 'delivery', 'República Dominicana', 'automatización'],
   openGraph: {
     title: 'Digital Negocios RD | Automatiza Pedidos por WhatsApp 24/7',
-    description: 'Bot de WhatsApp para automatizar pedidos de tu restaurante o negocio de comida en República Dominicana. RD$800/mes.',
+    description: 'Bot de WhatsApp para automatizar pedidos de tu restaurante o negocio de comida en República Dominicana. Desde RD$1,500/mes.',
     type: 'website',
     images: [
       {
