@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-touch-icon.png',
   },
+  other: {
+    'facebook-domain-verification': 'yf7tgbv75qce8kjsd6bf8jdgj15634',
+  },
 }
 
 export default function RootLayout({
