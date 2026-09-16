@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button"
-import { Check, X, MessageCircle, Zap, Crown, Layers, type LucideIcon } from "lucide-react"
+import { Check, X, MessageCircle, Zap, Crown, Layers, ShieldCheck, type LucideIcon } from "lucide-react"
 
 const WHATSAPP_NUMBER = "18099869730"
+
+// Plan(es) que se muestran en la landing pública. El Plan Básico existe en `plans`
+// pero solo se publica cuando el caso lo requiere: agregar "basico" aquí.
+const PUBLIC_PLAN_IDS = ["elite"]
 
 type Plan = {
   id: string
@@ -29,7 +33,7 @@ const plans: Plan[] = [
     Icon: Zap,
     target: "Ideal para negocios que quieren automatizar sus pedidos por WhatsApp",
     setup: "RD$3,000",
-    monthly: "RD$1,500",
+    monthly: "RD$2,000",
     featured: false,
     includes: [
       "Automatización completa de pedidos por WhatsApp",
@@ -51,8 +55,8 @@ const plans: Plan[] = [
     subtitle: "Plan Elite IA",
     Icon: Crown,
     target: "Para negocios que quieren IA conversacional y catálogo digital",
-    setup: "RD$8,000",
-    monthly: "RD$5,000",
+    setup: "RD$5,000",
+    monthly: "RD$4,000",
     featured: true,
     badge: "⭐ RECOMENDADO",
     includes: [
@@ -95,12 +99,25 @@ const comparisonFeatures: ComparisonFeature[] = [
   { name: "Mensajes masivos a clientes", basico: false, elite: true },
 ]
 
-function PlanCard({ plan }: { plan: Plan }) {
+function OfficialBadge({ variant }: { variant: "featured" | "default" }) {
+  const classes =
+    variant === "featured"
+      ? "bg-white/10 border-white/25 text-blue-50"
+      : "bg-blue-50 border-blue-200 text-blue-700"
+  return (
+    <div className={`mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium ${classes}`}>
+      <ShieldCheck className="w-3.5 h-3.5" />
+      Conexión oficial de WhatsApp Business API
+    </div>
+  )
+}
+
+function PlanCard({ plan, standalone }: { plan: Plan; standalone: boolean }) {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(plan.message)}`
 
   if (plan.featured) {
     return (
-      <div className="relative flex flex-col rounded-3xl shadow-2xl overflow-hidden ring-4 ring-blue-400 scale-105 z-10 bg-gradient-to-br from-blue-600 to-indigo-700">
+      <div className={`relative flex flex-col rounded-3xl shadow-2xl overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700 ${standalone ? "" : "ring-4 ring-blue-400 scale-105 z-10"}`}>
         {plan.badge && (
           <div className={`absolute top-5 right-5 ${plan.badgeBg} text-white text-xs font-bold px-3 py-1.5 rounded-full`}>
             {plan.badge}
@@ -116,13 +133,20 @@ function PlanCard({ plan }: { plan: Plan }) {
           </div>
           <p className="text-sm text-blue-200 mb-6 mt-2">{plan.target}</p>
 
-          <div className="mb-6 pb-6 border-b border-blue-400/50">
-            <div className="flex items-baseline gap-1 mb-1">
-              <span className="text-4xl font-extrabold">{plan.monthly}</span>
-              <span className="text-blue-200 text-base">/mes</span>
+          <div className="mb-6 pb-6 border-b border-blue-400/50 grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-200 mb-1">Instalación</p>
+              <span className="text-3xl font-extrabold">{plan.setup}</span>
+              <p className="text-xs text-blue-200 mt-0.5">pago único</p>
             </div>
-            <p className="text-sm text-blue-200">Setup: <span className="font-semibold text-white">{plan.setup}</span> (pago único)</p>
+            <div className="pl-4 border-l border-blue-400/40">
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-200 mb-1">Mensualidad</p>
+              <span className="text-3xl font-extrabold">{plan.monthly}</span>
+              <p className="text-xs text-blue-200 mt-0.5">/mes</p>
+            </div>
           </div>
+
+          <OfficialBadge variant="featured" />
 
           <ul className="space-y-2.5 flex-1 mb-7">
             {plan.includes.map((feature, i) => (
@@ -161,13 +185,20 @@ function PlanCard({ plan }: { plan: Plan }) {
         </div>
         <p className="text-sm text-muted-foreground mb-6 mt-2">{plan.target}</p>
 
-        <div className="mb-6 pb-6 border-b border-border">
-          <div className="flex items-baseline gap-1 mb-1">
-            <span className="text-4xl font-extrabold text-blue-600">{plan.monthly}</span>
-            <span className="text-muted-foreground text-base">/mes</span>
+        <div className="mb-6 pb-6 border-b border-border grid grid-cols-2 gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Instalación</p>
+            <span className="text-3xl font-extrabold text-blue-600">{plan.setup}</span>
+            <p className="text-xs text-muted-foreground mt-0.5">pago único</p>
           </div>
-          <p className="text-sm text-muted-foreground">Setup: <span className="font-semibold text-foreground">{plan.setup}</span> (pago único)</p>
+          <div className="pl-4 border-l border-border">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Mensualidad</p>
+            <span className="text-3xl font-extrabold text-blue-600">{plan.monthly}</span>
+            <p className="text-xs text-muted-foreground mt-0.5">/mes</p>
+          </div>
         </div>
+
+        <OfficialBadge variant="default" />
 
         <ul className="space-y-2.5 flex-1 mb-7">
           {plan.includes.map((feature, i) => (
@@ -212,6 +243,11 @@ export function Pricing() {
   const addonMessage = "Hola! Quiero agregar el Add-on de Catálogo Digital a mi plan"
   const addonWhatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(addonMessage)}`
 
+  const visiblePlans = plans.filter((plan) => PUBLIC_PLAN_IDS.includes(plan.id))
+  const basico = plans.find((plan) => plan.id === "basico")
+  const elite = plans.find((plan) => plan.id === "elite")
+  const showComparison = visiblePlans.length > 1 && basico && elite
+
   return (
     <section id="precios" className="py-16 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -226,9 +262,9 @@ export function Pricing() {
         </div>
 
         {/* Plans Grid */}
-        <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6 items-start mb-12">
-          {plans.map((plan) => (
-            <PlanCard key={plan.id} plan={plan} />
+        <div className={`mx-auto grid gap-6 items-start mb-12 ${visiblePlans.length > 1 ? "max-w-3xl md:grid-cols-2" : "max-w-md"}`}>
+          {visiblePlans.map((plan) => (
+            <PlanCard key={plan.id} plan={plan} standalone={visiblePlans.length === 1} />
           ))}
         </div>
 
@@ -257,48 +293,52 @@ export function Pricing() {
         </div>
 
         {/* Comparison Table */}
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold text-center text-foreground mb-8">
-            Comparación de Features
-          </h3>
-          <div className="rounded-2xl border border-border overflow-hidden shadow-sm">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-muted/60">
-                  <th className="text-left py-4 px-5 font-semibold text-foreground w-[60%]">Feature</th>
-                  <th className="text-center py-4 px-3 font-semibold text-blue-600 w-[20%]">Básico</th>
-                  <th className="text-center py-4 px-3 font-bold text-white bg-blue-600 w-[20%]">Elite IA ⭐</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonFeatures.map((feature, i) => (
-                  <tr
-                    key={i}
-                    className={i % 2 === 0 ? "bg-background" : "bg-muted/30"}
-                  >
-                    <td className="py-3 px-5 text-muted-foreground">{feature.name}</td>
-                    <td className="py-3 px-3"><CheckCell value={feature.basico} /></td>
-                    <td className="py-3 px-3 bg-blue-50"><CheckCell value={feature.elite} /></td>
+        {showComparison && basico && elite && (
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold text-center text-foreground mb-8">
+              Comparación de Features
+            </h3>
+            <div className="rounded-2xl border border-border overflow-hidden shadow-sm">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-muted/60">
+                    <th className="text-left py-4 px-5 font-semibold text-foreground w-[60%]">Feature</th>
+                    <th className="text-center py-4 px-3 font-semibold text-blue-600 w-[20%]">Básico</th>
+                    <th className="text-center py-4 px-3 font-bold text-white bg-blue-600 w-[20%]">Elite IA ⭐</th>
                   </tr>
-                ))}
-              </tbody>
-              <tfoot>
-                <tr className="bg-muted/60 border-t border-border">
-                  <td className="py-4 px-5 font-semibold text-foreground">Precio mensual</td>
-                  <td className="py-4 px-3 text-center font-bold text-blue-600">RD$1,500</td>
-                  <td className="py-4 px-3 text-center font-bold text-white bg-blue-600">RD$5,000</td>
-                </tr>
-                <tr className="bg-muted/40">
-                  <td className="py-4 px-5 font-semibold text-foreground">Setup (pago único)</td>
-                  <td className="py-4 px-3 text-center font-semibold text-muted-foreground">RD$3,000</td>
-                  <td className="py-4 px-3 text-center font-semibold text-white bg-blue-600">RD$8,000</td>
-                </tr>
-              </tfoot>
-            </table>
+                </thead>
+                <tbody>
+                  {comparisonFeatures.map((feature, i) => (
+                    <tr
+                      key={i}
+                      className={i % 2 === 0 ? "bg-background" : "bg-muted/30"}
+                    >
+                      <td className="py-3 px-5 text-muted-foreground">{feature.name}</td>
+                      <td className="py-3 px-3"><CheckCell value={feature.basico} /></td>
+                      <td className="py-3 px-3 bg-blue-50"><CheckCell value={feature.elite} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr className="bg-muted/60 border-t border-border">
+                    <td className="py-4 px-5 font-semibold text-foreground">Precio mensual</td>
+                    <td className="py-4 px-3 text-center font-bold text-blue-600">{basico.monthly}</td>
+                    <td className="py-4 px-3 text-center font-bold text-white bg-blue-600">{elite.monthly}</td>
+                  </tr>
+                  <tr className="bg-muted/40">
+                    <td className="py-4 px-5 font-semibold text-foreground">Setup (pago único)</td>
+                    <td className="py-4 px-3 text-center font-semibold text-muted-foreground">{basico.setup}</td>
+                    <td className="py-4 px-3 text-center font-semibold text-white bg-blue-600">{elite.setup}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
+        )}
 
+        <div className="max-w-3xl mx-auto">
           <p className="text-center text-sm text-muted-foreground mt-6">
-            ¿Dudas sobre qué plan elegir?{" "}
+            {showComparison ? "¿Dudas sobre qué plan elegir?" : "¿Tu negocio necesita algo distinto?"}{" "}
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Necesito ayuda para elegir el plan ideal para mi negocio")}`}
               target="_blank"
