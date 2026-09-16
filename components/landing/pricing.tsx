@@ -5,7 +5,7 @@ const WHATSAPP_NUMBER = "18099869730"
 
 // Plan(es) que se muestran en la landing pública. El Plan Básico existe en `plans`
 // pero solo se publica cuando el caso lo requiere: agregar "basico" aquí.
-const PUBLIC_PLAN_IDS = ["elite"]
+const PUBLIC_PLAN_IDS = ["basico", "elite"]
 
 type Plan = {
   id: string
