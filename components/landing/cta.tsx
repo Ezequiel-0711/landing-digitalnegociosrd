@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
 
-const WHATSAPP_NUMBER = "18298208024"
+const WHATSAPP_NUMBER = "18299137772"
 const WHATSAPP_MESSAGE = "Hola! Quiero solicitar una demo del bot de WhatsApp"
 
 export function CTA() {

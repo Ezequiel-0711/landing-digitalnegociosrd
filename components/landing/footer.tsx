@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { MapPin, MessageCircle } from "lucide-react"
 
-const WHATSAPP_NUMBER = "18298208024"
+const WHATSAPP_NUMBER = "18299137772"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()

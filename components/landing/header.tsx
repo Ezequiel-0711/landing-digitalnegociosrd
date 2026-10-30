@@ -6,7 +6,7 @@ import Link from "next/link"
 import { MessageCircle, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const WHATSAPP_NUMBER = "18298208024" // Reemplazar con número real
+const WHATSAPP_NUMBER = "18299137772" // Reemplazar con número real
 const WHATSAPP_MESSAGE = "Hola! Me interesa el bot de WhatsApp para mi negocio"
 
 export function Header() {

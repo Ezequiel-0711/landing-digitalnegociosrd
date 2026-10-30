@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Check, X, MessageCircle, Zap, Crown, Layers, ShieldCheck, type LucideIcon } from "lucide-react"
 
-const WHATSAPP_NUMBER = "18099869730"
+const WHATSAPP_NUMBER = "18299137772"
 
 // Plan(es) que se muestran en la landing pública. El Plan Básico existe en `plans`
 // pero solo se publica cuando el caso lo requiere: agregar "basico" aquí.
